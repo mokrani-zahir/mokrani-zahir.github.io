@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="{{site.url}}/assets/css/style.css">
+
+    <title>{{ page.title }}</title>
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <ul class="main-nav">
+                <li><a href="{{site.url}}/">Home page</a></li>
+                <li><a href="{{site.url}}/about/">About</a></li>
+                <li><a href="{{site.url}}/articles/">Article</a></li>
+                <li><a href="{{site.url}}/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>{{ page.title }}</h1>
+            <p>
+                {{ page.description }}
+            </p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            {{ content }}
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="container">
+            <ul>
+                <li style="float:left"><a href="{{site.social.twitter}}" target="_blank" class="network"><img
+                            src="{{site.url}}/assets/imgs/twitter.svg" alt="twitter"> Twitter</a></li>
+                <li style="float:left"><a href="{{site.social.youtube}}" target="_blank" class="network"><img
+                            src="{{site.url}}/assets/imgs/youtube.svg" alt="youtube"> Youtube</a></li>
+                <li style="float:left"><a href="{{site.social.linkedin}}" target="_blank" class="network"><img
+                            src="{{site.url}}/assets/imgs/linkedin.svg" alt="linkedin"> Linkedin</a></li>
+            </ul>
+        </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</body>
+
+</html>

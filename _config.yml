@@ -1,0 +1,43 @@
+title: MOKRANI Zahir
+description: >- # this means to ignore newlines until "baseurl:"
+  Bonjour et bienvenue sur mon blog.
+  Je me présente, je m’appelle Mokrani Zahir.
+  Je suis passionné par tout ce qui touche à la technologie, de l’électronique à l’informatique — des simples diodes jusqu’au développement d’applications.
+  Sur ce blog, je partage mes expériences, mes projets, mes découvertes ainsi que les outils que j’utilise au quotidien.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+# Build settings
+theme: minima
+
+# 1. Définir la collection pages
+collections:
+  pages:
+    output: true
+    permalink: /:path/
+
+# 2. Pagination native pour la collection
+paginate: 5  # items par page
+paginate_path: "/pages/page:num/"  # URL des pages
+paginate_collection: pages  # IMPORTANT: spécifier la collection
+
+plugins:
+  - jekyll-feed
+
+
+# exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
+
+social:
+  linkedin: https://www.linkedin.com/in/zahir-mokrani/
+  youtube: https://youtube.com/@it.inside.mokrani
+  twitter: https://x.com/ZahirMokrani

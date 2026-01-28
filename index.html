@@ -1,0 +1,54 @@
+---
+layout: default
+
+title: Bienvenue
+description:    Bonjour et bienvenue sur mon blog.
+                Je me présente, je m’appelle Mokrani Zahir.
+                Je suis passionné par tout ce qui touche à la technologie, de l’électronique à l’informatique — des
+                simples
+                diodes jusqu’au développement d’applications.
+
+                Sur ce blog, je partage mes expériences, mes projets, mes découvertes ainsi que les outils que j’utilise
+                au
+                quotidien.
+
+---
+
+<section>
+    <div class="container">
+
+        <h2 class=".mb-8">Les derniers articles</h2>
+
+        <div class="posts">
+            {% for post in site.posts %}
+
+            <article class="card">
+
+                <h3 class="card_title">
+                    <a href="{{ post.url | relative_url }}">
+                        {{ post.title }}
+                    </a>
+                </h3>
+
+                <div class="card_tags">
+                    {% for tag in post.tags %}
+                    <a href="/tags/{{ tag }}">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+
+                <p class="card_about">
+                    {% if post.description %}
+                        {{ post.description }}
+                    {% else %}
+                        {{ post.excerpt | strip_html | truncate: 160 }}
+                    {% endif %}
+                </p>
+
+            </article>
+
+            {% endfor %}
+        </div>
+
+
+    </div>
+</section>
