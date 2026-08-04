@@ -24,6 +24,22 @@ ul, li{
     list-style: none;
 }
 
+ul ul {
+    margin: 4px 0 4px 16px;
+}
+
+ol{
+    margin-left: 16px;
+}
+
+ol ol{
+    margin: 4px 0 4px 16px;
+}
+
+ol li{
+    list-style-type: decimal;
+}
+
 h1,h2,h3{
     margin-bottom: 4px;
 }

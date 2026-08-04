@@ -2,25 +2,25 @@
 layout: post
 
 title: "Utilisation Avancée du Terminal : Raccourcis et Commandes pour Gagner du Temps"
-description: "Je sais que beaucoup d’informaticiens ont du mal à utiliser le terminal. C’est souvent pénible et peu efficace… mais paradoxalement, on l’utilise très souvent.<br/>Je remarque que beaucoup de gens perdent beaucoup de temps à créer ou modifier des commandes simplement parce qu’ils ne connaissent pas les astuces et raccourcis que les pros utilisent.<br/>Pour ma part, j’utilise régulièrement ces raccourcis, que ce soit sur les serveurs des clients ou sur mon propre PC (Debian). Ils permettent de gagner du temps, de travailler avec plus de précision et de rester organisé.<br/>Dans cet article, je vais partager les raccourcis que j’utilise personnellement au quotidien, pour vous aider à devenir plus efficaces dans le terminal.<br/>Alors, êtes-vous prêts ? GO !"
+description: "Je sais que beaucoup d’informaticiens ont du mal à utiliser le terminal. C’est souvent pénible et peu efficace… mais paradoxalement, on l’utilise très souvent.Je remarque que beaucoup de gens perdent beaucoup de temps à créer ou modifier des commandes simplement parce qu’ils ne connaissent pas les astuces et raccourcis que les pros utilisent.Pour ma part, j’utilise régulièrement ces raccourcis, que ce soit sur les serveurs des clients ou sur mon propre PC (Debian). Ils permettent de gagner du temps, de travailler avec plus de précision et de rester organisé.Dans cet article, je vais partager les raccourcis que j’utilise personnellement au quotidien, pour vous aider à devenir plus efficaces dans le terminal.Alors, êtes-vous prêts ? GO !"
 tags: [linux, bash, ubuntu, hack]
 ---
 
 ## Avant d’entrer dans le vif du sujet
 
-Avant tout, il faut comprendre quelques points très importants.
-Il existe plusieurs types de terminaux et ils dépendent souvent du système d’exploitation utilisé.
-Par exemple, sous Windows, on utilise principalement CMD ou PowerShell.
-Sous Linux, on utilise généralement des shells comme Bash, Zsh ou Sh.
-Sur d’autres systèmes comme Unix, AIX ou BSD, le terminal et les commandes peuvent être différents, même s’ils restent globalement similaires.
-Beaucoup de personnes pensent que Linux et Unix utilisent exactement le même terminal, mais ce n’est pas totalement vrai.
-En réalité, quand on parle de “Linux”, on fait souvent référence à GNU/Linux :
+Avant tout, il faut comprendre quelques points très importants. Il existe plusieurs types de terminaux et ils dépendent souvent du système d’exploitation utilisé.
+
+Par exemple, sous Windows, on utilise principalement CMD ou PowerShell. Sous Linux, on utilise généralement des shells comme Bash, Zsh ou Sh. Sur d’autres systèmes comme Unix, AIX ou BSD, le terminal et les commandes peuvent être différents, même s’ils restent globalement similaires.
+
+Beaucoup de personnes pensent que Linux et Unix utilisent exactement le même terminal, mais ce n’est pas totalement vrai. En réalité, quand on parle de “Linux”, on fait souvent référence à GNU/Linux :
 
 * Linux est le noyau (kernel)
-* GNU fournit les outils, dont le shell et les commandes du terminal
+* GNU fournit les outils, dont le shell et les commandes du terminal.
 
 Par exemple, Android utilise le noyau Linux, mais n’utilise pas le terminal GNU comme sur Debian ou Ubuntu.
+
 Du côté d’Unix, il existe plusieurs distributions, les plus connues étant :
+
 * BSD (FreeBSD, OpenBSD, etc.)
 * AIX (d’IBM)
 
@@ -28,17 +28,28 @@ Même si leurs commandes se ressemblent, elles restent différentes de l’envir
 
 ## Créer et modifier des commandes rapidement
 
-Ici, nous allons explorer quelques raccourcis et astuces pour manipuler rapidement la ligne de commande, gagner du temps et travailler plus efficacement. Dans la suite de l’article, nous verrons chaque technique en détail.
+Ici, nous allons explorer quelques raccourcis et astuces pour manipuler rapidement la ligne de commande, gagner du temps et travailler plus efficacement.
+
+Dans la suite de l’article, nous verrons chaque technique en détail.
 
 ### Tabulation `⇥`
 
-*** :) *** Je sais que ça paraît connu, mais il y a des gens qui ne connaissent pas l’astuce pour recréer rapidement un nom de fichier bizarre ou très long. Ceux qui ne connaissent pas doivent le retaper entièrement, et on voit leur visage dégoûté : 'Ahh, je vais devoir tout taper… mais qui crée des noms de fichier aussi bizarres ?!' Je pense que c’est fait exprès pour embêter les gens 😅.
+*** :) *** Je sais que ça paraît connu, mais il y a des gens qui ne connaissent pas l’astuce pour retrouver rapidement un nom de fichier bizarre ou très long.
 
-Bref, la tabulation : les qui gens ne savent pas où elle se trouve. Voici son symbole (⇥). En général, la touche Tab est située tout à gauche du clavier, au‑dessus de la touche Majuscule (Shift).
+Ceux qui ne connaissent pas doivent le retaper entièrement, et on voit leur visage dégoûté : « Ahh, je vais devoir tout taper… mais qui crée des noms de fichiers aussi bizarres ?! »
 
-Cette astuce permet de compléter automatiquement une commande. Par exemple, si je veux écrire `ffmpeg.exe`, au lieu de taper tout le nom, j’écris simplement `ffm` puis j’appuie sur Tab : le terminal complète la commande tout seul.
+Je pense que c’est fait exprès pour embêter les gens 😅.
+
+Bref, la tabulation : il y a des gens qui ne savent pas où elle se trouve. Voici son symbole (⇥).
+
+En général, la touche Tab est située tout à gauche du clavier, au-dessus de la touche Majuscule (Shift).
+
+Cette astuce permet de compléter automatiquement une commande.
+
+Par exemple, si je veux écrire `ffmpeg.exe`, au lieu de taper tout le nom, j’écris simplement `ffm` puis j’appuie sur Tab : le terminal complète la commande tout seul.
 
 Elle est encore plus utilisée pour les noms de fichiers. Il suffit de taper les premières lettres du fichier puis d’appuyer sur Tab, et le terminal complète automatiquement.
+
 Si le nom ne se complète pas entièrement, c’est souvent parce qu’il existe plusieurs fichiers qui commencent par les mêmes lettres : dans ce cas, il faut ajouter une ou deux lettres de plus puis appuyer de nouveau sur Tab.
 
 ### Aller au début de la ligne de commande `CTRL` + `a`
@@ -59,9 +70,9 @@ Au lieu de déplacer caractère par caractère, déplacez mot par mot avec ``CTR
 Après avoir ajouté ce paramètre, il n’est plus compatible avec d’autres paramètres. Il faut donc enlever ce paramètre très long. Je vais ramener mon curseur à la fin du paramètre avec l’ancienne astuce 😏 puis je supprime.
 Ahh zut, c’est supprimé accidentellement ! Que faire ? Pas de panique : tu sais que dans le terminal, tu peux revenir en arrière comme dans Word. Oui, oui, tu fais seulement ``CTRL`` + ``_``
 
-### supprimer effecement ou supprimer un mot complet ``CTRL`` + ``W``
+### supprimer effacement ou supprimer un mot complet ``CTRL`` + ``W``
 
-Ba, avec la touche ``supprimer ←``, ce n’est pas efficace : je effaces souvent accidentellement les autres paramètres.
+Ba, avec la touche ``supprimer ←``, ce n’est pas efficace : j’efface souvent accidentellement les autres paramètres.
 Ba, fais ``CTRL`` + ``W`` à la fin du mot ou paramètre pour tout supprimer. Comme ça, tu évites de supprimer d’autres choses accidentellement.
 
 ### supprimer tous les paramètres après le curseur ``CTRL`` + ``K``
@@ -83,7 +94,7 @@ Bon, pour revenir sur les anciennes commandes déjà tapées, on utilise souvent
 
 Il y a une astuce : faire une recherche sur les anciennes commandes déjà exécutées. Pour ça, fais ``CTRL`` + ``R`` et le terminal te donnera la main pour entrer le mot que tu cherches.
 
-## Recherche sur resulta d'un command
+## Recherche sur résultat d'un command
 
 **Anecdote** : je me souviens très bien, en installant un serveur VoIP, chaque étudiant avait son propre serveur et essayait de se connecter aux serveurs des autres pour tester si la VoIP marchait.
 Pour cela, il fallait avoir l’adresse IP LAN sur Linux avec la commande ``ip address``.
