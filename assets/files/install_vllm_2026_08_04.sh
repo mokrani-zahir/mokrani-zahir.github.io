@@ -28,8 +28,12 @@ fi
 
 echo "=== Installation de UV ==="
 
-wget -qO- https://astral.sh/uv/install.sh | sh
-
+echo "=== Installation de UV ==="
+if ! command -v uv &> /dev/null; then
+    wget -qO- https://astral.sh/uv/install.sh | sh
+else
+    echo "UV est déjà installé."
+fi
 
 export PATH="$HOME/.local/bin:$PATH"
 
