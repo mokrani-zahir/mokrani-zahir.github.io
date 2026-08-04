@@ -226,7 +226,7 @@ Pour éviter de refaire toutes les étapes manuellement, surtout avec le risque 
 Télécharger et exécuter le script d'installation :
 
 ```bash
-wget -qO- https://mokrani-zahir.github.io/files/install_vllm_2026_08_04.sh | sh
+wget -qO- https://github.com/mokrani-zahir/mokrani-zahir.github.io/blob/master/assets/files/install_vllm_2026_08_04.sh | sh
 ```
 
 Pour utiliser vLLM, il faut d'abord activer l'environnement virtuel Python :
