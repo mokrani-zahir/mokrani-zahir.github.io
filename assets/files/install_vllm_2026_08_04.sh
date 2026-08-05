@@ -6,7 +6,7 @@ echo "=== Mise à jour du système ==="
 sudo apt update
 
 echo "=== Installation des dépendances ==="
-sudo apt install -y wget curl build-essential python3.12-dev python3.12-venv libpython3.12-dev
+sudo apt install -y wget curl build-essential python3-dev python3-venv
 
 echo "=== Installation CUDA 12.6 ==="
 wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.1-1_all.deb
@@ -24,9 +24,6 @@ if ! grep -q "/usr/local/cuda-12.6/bin" ~/.bashrc; then
     echo 'export PATH=/usr/local/cuda-12.6/bin:$PATH' >> ~/.bashrc
     echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
 fi
-
-
-echo "=== Installation de UV ==="
 
 echo "=== Installation de UV ==="
 if ! command -v uv &> /dev/null; then
