@@ -45,7 +45,7 @@ cd ~/vllm
 uv venv --python 3.12 --seed
 
 
-source .venv/bin/activate
+. .venv/bin/activate
 
 
 echo "=== Installation vLLM ==="
