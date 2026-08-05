@@ -131,8 +131,7 @@ nvcc --version
 *Au moment de la rédaction de cet article, vLLM utilise python 3.12. Il est donc recommandé de toujours vérifier la documentation officielle pour connaître la version de python compatible.*
 
 ```bash
-sudo apt install python3.12-dev python3.12-venv libpython3.12-dev
-sudo apt install build-essential
+sudo apt install build-essential python3-dev python3-venv
 ```
 
 ### Installation de UV
