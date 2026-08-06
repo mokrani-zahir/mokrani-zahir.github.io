@@ -32,13 +32,12 @@ L'objectif est de comprendre comment passer d'une utilisation locale d'un modèl
   - [Installation WSL (Ubunut)](#installation-wsl)
 
 - [Installation des dépendances](#installation-des-dépendances)
-  - [Installation de CUDA 12.6](#installation-de-cuda-126)
-  - [Installation de Python 3.12 et PyTorch](#installation-de-python-312)
-  - [Installation de curl et UV](#installation-de-uv)
+- [Installation de UV](#installation-de-uv)
 
 - [Installation de vLLM](#installation-de-vllm)
     - [Pourquoi utiliser un environnement virtuel Python](#pourquoi-utiliser-un-environnement-virtuel-python)
-    - [Installation de vLLM](#installation-de-vllm)
+    - [Installation de vLLM](#creer-un-variable-envirenement)
+    - [Quelques problèmes de WSL et leurs solutions](#quelques-problèmes-de-wsl-et-leurs-solutions)
 
 - [Test rapide du modèle](#test-rapide-du-modèle)
 - [Bonus : Automatiser l’installation de vLLM avec un script Shell](#Bonus-:-Automatiser-l’installation-de-vLLM-avec-un-script-Shell)
@@ -88,53 +87,15 @@ wsl --install
 
 ## Installation des dépendances
 
-### Installation de CUDA 12.6
-
-*Au moment de la rédaction de cet article, vLLM utilise CUDA 12.6. Il est donc recommandé de toujours vérifier la documentation officielle pour connaître la version de CUDA compatible.*
-
-Voici le lien officiel d'installation de CUDA pour Ubuntu WSL :
-
-<a href="https://developer.nvidia.com/cuda-12-6-0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_network" target="_blank" rel="noopener noreferrer">Site officiel NVIDIA CUDA</a>
+Avant d'installer vLLM, il faut installer quelques outils nécessaires au téléchargement et à la compilation de certains composants.
 
 ```bash
-wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.1-1_all.deb
-sudo dpkg -i cuda-keyring_1.1-1_all.deb
-sudo apt-get update
-sudo apt-get -y install cuda-toolkit-12-6
+sudo apt install -y build-essential
 ```
 
-*Le mot de passe demandé correspond au mot de passe que vous avez créé lors de la configuration initiale de WSL.*
+**build-essential** : installe les outils de compilation essentiels sous Linux, notamment gcc, g++ et make, nécessaires pour compiler certains dépendances utilisées par vLLM.
 
-Maintenant, il faut ajouter les exécutables CUDA dans les variables d'environnement afin de pouvoir les utiliser facilement depuis le terminal.
-
-Ajouter les chemins suivants dans la variable `PATH` :
-
-```bash
-export PATH=/usr/local/cuda-12.6/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64:$LD_LIBRARY_PATH
-```
-
-Pour appliquer les modifications automatiquement à chaque ouverture du terminal, ajouter ces lignes dans le fichier :
-
-```bash
-nano ~/.bashrc
-source ~/.bashrc
-```
-
-Ensuite, vérifier que CUDA est bien installé :
-```bash
-nvcc --version
-```
-
-### Installation de Python 3.12
-
-*Au moment de la rédaction de cet article, vLLM utilise python 3.12. Il est donc recommandé de toujours vérifier la documentation officielle pour connaître la version de python compatible.*
-
-```bash
-sudo apt install build-essential python3-dev python3-venv
-```
-
-### Installation de UV
+## Installation de UV
 
 Pour installer **UV**, c'est simple :
 
@@ -142,6 +103,7 @@ Pour installer **UV**, c'est simple :
 wget -qO- https://astral.sh/uv/install.sh | sh
 ```
 
+*UV est comme <a href="https://www.anaconda.com/" target="_blank" rel="noopener noreferrer">**Anaconda**</a> sur Windows : il aide à créer des environnements adaptés et à gérer les paquets et outils que l'on utilise.*
 
 ## Installation de vLLM
 
@@ -182,15 +144,58 @@ cd vllm
 Créer et activer l'environnement virtuel :
 
 ```bash
-uv venv --python 3.12 --seed
+uv venv --python 3.12 --seed --managed-python
 source .venv/bin/activate
 ```
 
 Ensuite, installer vLLM et PyTorch :
 
 ```bash
-uv pip install vllm --torch-backend=cu126
+uv pip install vllm --torch-backend=auto
 ```
+
+## Quelques problèmes de WSL et leurs solutions
+
+WSL2 fonctionne très bien pour exécuter vLLM avec un GPU NVIDIA, mais certaines limitations peuvent apparaître selon les fonctionnalités utilisées.
+
+### Problème : mémoire épinglée (*Pinned Memory*) avec WSL2
+
+Un problème connu concerne l'utilisation de la mémoire épinglée (*pinned memory*) avec CUDA Graph et certaines fonctionnalités comme le CPU offload.
+
+Une correction a été ajoutée dans vLLM pour améliorer le support de WSL2 :
+
+<a href="https://github.com/vllm-project/vllm/pull/41496" target="_blank" rel="noopener noreferrer">Bug Fix - Allow pinned memory for WSL2 #41496</a>
+
+La solution consiste à activer la mémoire épinglée WSL2 avec la variable d'environnement suivante :
+
+```bash
+export VLLM_WSL2_ENABLE_PIN_MEMORY=1
+```
+
+### Problème : incompatibilité FlashInfer avec certaines nouvelles cartes NVIDIA
+
+Certaines architectures GPU NVIDIA récentes peuvent rencontrer des problèmes avec FlashInfer, utilisé par défaut par vLLM pour certaines opérations de sampling.
+
+Plus de détails sur les issues GitHub :
+
+<a href="https://github.com/vllm-project/vllm/issues/49497" target="_blank" rel="noopener noreferrer">[Bug]: FlashInfer sampler JIT crashes engine startup when nvcc isn't discoverable (default precompiled/wheel install) — no fallback to native sampler #49497</a>
+
+<a href="https://github.com/vllm-project/vllm/pull/49314" target="_blank" rel="noopener noreferrer">fix(sampler): fall back to native sampling when flashinfer is absent</a>
+
+La solution consiste à désactiver le sampler FlashInfer avec la variable d'environnement suivante :
+
+```bash
+export VLLM_USE_FLASHINFER_SAMPLER=0
+```
+
+Pour rendre ces variables permanentes :
+
+```bash
+echo 'export VLLM_WSL2_ENABLE_PIN_MEMORY=1' >> ~/.bashrc
+echo 'export VLLM_USE_FLASHINFER_SAMPLER=0' >> ~/.bashrc
+source ~/.bashrc
+```
+
 
 ## Test rapide du modèle
 
